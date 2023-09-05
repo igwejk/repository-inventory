@@ -1,0 +1,110 @@
+query repositoriesInEnterprise(
+  $slug: String!
+  $pageSize: Int!
+  $endCursorRepositories: String
+  $endCursorOrganizations: String
+) {
+  enterprise(slug: $slug) {
+    ...enterpriseFragment
+  }
+}
+
+fragment enterpriseFragment on Enterprise {
+  name
+  organizations(first: $pageSize, after: $endCursor) {
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+    nodes {
+      ... on Organization {
+        name
+        login
+        repositories(
+          first: $pageSize
+          after: $endCursor
+          orderBy: { field: NAME, direction: ASC }
+        ) {
+          totalCount
+          totalDiskUsage
+          pageInfo {
+            endCursor
+            hasNextPage
+          }
+          nodes {
+            ... on Repository {
+              branches: refs(refPrefix: "refs/heads/") {
+                totalCount
+              }
+              branchProtectionRules {
+                totalCount
+              }
+              commitComments {
+                totalCount
+              }
+              collaborators {
+                totalCount
+              }
+              diskUsage
+              discussions {
+                totalCount
+              }
+              hasWikiEnabled
+              isEmpty
+              isFork
+              issues {
+                totalCount
+              }
+              milestones {
+                totalCount
+              }
+              name
+              owner {
+                login
+              }
+              projects {
+                totalCount
+              }
+              pullRequests {
+                totalCount
+              }
+              pushedAt
+              releases {
+                totalCount
+              }
+              tags: refs(refPrefix: "refs/tags/") {
+                totalCount
+              }
+              updatedAt
+              url
+              isArchived
+              isTemplate
+              languages(first: 25) {
+                nodes {
+                  ... on Language {
+                    name
+                  }
+                }
+              }
+              primaryLanguage {
+                name
+              }
+              object(expression: "HEAD") {
+                ... on Commit {
+                  authors(first: 25) {
+                    nodes {
+                      ... on GitActor {
+                        name
+                        email
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

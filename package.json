@@ -1,0 +1,29 @@
+{
+    "name": "repository-inventory",
+    "version": "1.0.0",
+    "description": "Generate statistics for repositories in a GitHub enterprise account",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test implemented\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/igwejk/repository-inventory.git"
+    },
+    "keywords": [
+        "GHEC",
+        "EMU",
+        "repository",
+        "inventory"
+    ],
+    "author": "Igwe Kalu <igwe.kalu@live.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/igwejk/repository-inventory/issues"
+    },
+    "homepage": "https://github.com/igwejk/repository-inventory#readme",
+    "dependencies": {
+        "octokit": "^3.1.0"
+    },
+    "type": "module"
+}
